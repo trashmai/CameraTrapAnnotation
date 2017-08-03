@@ -1,0 +1,11 @@
+{
+    "os_type": "windows",
+    "unix": {
+        "images_base_path": "/var/www/html",
+        "web_base_path": "http://twebi.net"
+    },
+    "windows": {
+        "images_base_path": "D:/camera_trap/xampp/htdocs",
+        "web_base_path": "http://localhost"
+    }
+}

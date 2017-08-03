@@ -1,0 +1,1 @@
+..\..\php\php.exe change_base_path.php local "F:/camera_trap/xampp/htdocs" "D:/camera_trap/xampp/htdocs"

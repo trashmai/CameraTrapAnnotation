@@ -1,0 +1,1 @@
+..\..\php\php.exe genImgList.php images

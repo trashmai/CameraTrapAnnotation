@@ -1,0 +1,1 @@
+..\..\php\php.exe change_base_path.php web "http://localhost" "http://localhost"
