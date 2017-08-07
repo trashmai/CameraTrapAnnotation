@@ -64,31 +64,30 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
     $scope.current_image_dir_idx = -1;
     $scope.last_image_dir_idx = -1;
 
-    $scope.toggleSib = function (e) {
+    $scope.toggleSib = function(e) {
 
-      e.preventDefault();
-      e.stopPropagation();
-      var t = $(e.target).next();
+        e.preventDefault();
+        e.stopPropagation();
+        var t = $(e.target).next();
 
-      var toggled_class = 'must_show';
-      // var toggled_class = 'enlong';
+        var toggled_class = 'must_show';
+        // var toggled_class = 'enlong';
 
-      //*
-      if (!t.hasClass(toggled_class)) {
-        $(e.target).addClass('mm-expand');
-        $(e.target).removeClass('mm-close');
-        t.addClass(toggled_class);
-      }
-      else if (t.hasClass(toggled_class)) {
-        $(e.target).addClass('mm-close');
-        $(e.target).removeClass('mm-expand');
-        //t.css('display', 'none');
-        t.removeClass(toggled_class);
-      }
-      //*/
+        //*
+        if (!t.hasClass(toggled_class)) {
+            $(e.target).addClass('mm-expand');
+            $(e.target).removeClass('mm-close');
+            t.addClass(toggled_class);
+        } else if (t.hasClass(toggled_class)) {
+            $(e.target).addClass('mm-close');
+            $(e.target).removeClass('mm-expand');
+            //t.css('display', 'none');
+            t.removeClass(toggled_class);
+        }
+        //*/
     }
 
-    $scope.toggleTargetImageClass = function() {
+    $scope.toggleTargetImageClass = function(e) {
         $scope.target_image_class.drag_target = true;
 
         if (!!$scope.target_image_class.fit) {
@@ -1909,16 +1908,14 @@ app.filter('displayRelObject', function() {
     };
 });
 
-app.directive("ngMobileClick", ['$parse', function ($parse) {
-    return function (scope, elem, attrs) {
-        elem.bind("touchstart click", function (e) {
+app.directive("ngMobileClick", ['$parse', function($parse) {
+    return function(scope, elem, attrs) {
+        elem.bind("touchstart click", function(e) {
             e.preventDefault();
             e.stopPropagation();
             var mobileClickFunction = $parse(attrs['ngMobileClick']);
-            mobileClickFunction(scope, {$event: event});
+            mobileClickFunction(scope, { $event: event });
             scope.$apply();
         });
     }
 }]);
-
-

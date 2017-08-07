@@ -236,10 +236,12 @@ $(document).ready(function() {
         }
     });
 
-    $.event.special.swipe.scrollSupressionThreshold = 50;
-    $.event.special.swipe.horizontalDistanceThreshold = 80;
-    $.event.special.swipe.verticalDistanceThreshold = 20;
-    $(document).delegate('.image.fit', 'swipeleft swiperight', function(e) {
+    $.event.special.swipe.scrollSupressionThreshold = 20;
+    $.event.special.swipe.horizontalDistanceThreshold = 50;
+    $.event.special.swipe.verticalDistanceThreshold = 10;
+    $(document).delegate(document, 'swipeleft swiperight', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         console.log(e);
         // console.log('大家好，我們是左左/右右');
         switch (e.type) {

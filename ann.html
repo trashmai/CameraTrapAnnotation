@@ -44,7 +44,7 @@
 <body ng-controller="annImgController" class='container_fluid'>
     <div class='col-12' style='padding:0px;'>
         <div class='row ct-xs-no-rpad' style='margin:20px 0px 0px 0px; width:100%;'>
-            <div class='clearfix ct-xs-no-rpad menu ct-md-show col-12 mm-close noshow' style='padding-left:15px;' ng-click='toggleSib($event)' ng-touch='toggleSib($event)'>檔案路徑</div>
+            <div class='clearfix ct-xs-no-rpad menu ct-md-show col-12 mm-close noshow' style='padding-left:15px;' ng-click='toggleSib($event)' ng-touch='toggleSib($event)'>清單摘要</div>
             <div class='col-xl-2 col-lg-3 ct-md-noshow ct-xs-no-rpad dir_img_tree_wrapper col-12'>
                 <div class='scroll' id='dir_img_tree' style="overflow-y:auto;" data-angular-treeview="true" data-tree-id="dirImgTree" data-tree-model="dirImgList" data-node-id="id" data-node-label="name" data-node-comment="comment" data-node-children="children">
                 </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div style='margin: 0 0 0 0px;'>
                     <div style='position:fixed;' ng-show='edit_token_form.$dirty'>注意，本頁內容遭修改且尚未存檔</div>
-                    <img id='target_image' ng-src='{{ann.url}}' ng-class="target_image_class" ng-click="toggleTargetImageClass()" />
+                    <img id='target_image' ng-src='{{ann.url}}' ng-class="target_image_class" ng-click="toggleTargetImageClass($event)" />
                     <!--img id='shadow' ng-src='{{ann.url}}' style='height:0px; width:100%; position:relative;' /-->
                 </div>
                 <div id='img_placeholder' style='height:0px;'></div>
