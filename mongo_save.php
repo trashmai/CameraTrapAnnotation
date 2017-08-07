@@ -68,7 +68,7 @@ function save ($data) {
 	$cdata->update($queryCondition, array('$set' => $data), $update_options);
 	//$cmeta->update($queryCondition, $meta, $update_options);
 
-	return array('criteria'=>$queryCondition, 'data' => $data, 'meta' => $meta, 'options' => $update_options, 'sessionId' => $sessionId);
+	return array('criteria'=>$queryCondition, 'data' => $data, 'meta' => null, 'options' => $update_options, 'sessionId' => $sessionId);
 }
 
 

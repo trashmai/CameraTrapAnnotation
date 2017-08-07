@@ -55,7 +55,7 @@ class Pusher implements WampServerInterface {
         foreach ($entryData as $d) {
             $url = $d['data']['url'];
             // echo $url . "\n";
-            $contents[$url] = $this->subscribedContents[$url];
+            $contents[$url] = @$this->subscribedContents[$url];
             $dataToBroadCast[$url] = $d;
         }
 
