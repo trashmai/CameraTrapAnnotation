@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    window.jump_to_edit = true;
     window.lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
     var mobilecheck = function() {
@@ -21,7 +22,10 @@ $(document).ready(function() {
 
         var target_img = document.querySelector('#target_image');
         var target_img_loaded = function() {
-            $(document).scrollTop($('#edit_section').offset().top - target_img.height);
+            if (!!window.jump_to_edit) {
+                $(document).scrollTop($('#edit_section').offset().top - target_img.height);
+                window.jump_to_edit = false;
+            }
         }
 
         if (target_img.complete && target_img.height) {
@@ -30,10 +34,10 @@ $(document).ready(function() {
             }
             target_img_loaded();
         } else {
-            target_img.addEventListener('load', target_img_loaded)
+            target_img.addEventListener('load', target_img_loaded);
             target_img.addEventListener('error', function() {
                 //alert('error')
-            })
+            });
         }
 
         $(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange", function(event) {
@@ -242,8 +246,9 @@ $(document).ready(function() {
     $(document).delegate(document, 'swipeleft swiperight', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log(e);
+        // console.log(e);
         // console.log('大家好，我們是左左/右右');
+        window.jump_to_edit = true;
         switch (e.type) {
             case "swipeleft":
                 console.log('大家好我是左左');

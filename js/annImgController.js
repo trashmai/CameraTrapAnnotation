@@ -78,11 +78,13 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
             $(e.target).addClass('mm-expand');
             $(e.target).removeClass('mm-close');
             t.addClass(toggled_class);
+            t.removeClass('must_hide');
         } else if (t.hasClass(toggled_class)) {
             $(e.target).addClass('mm-close');
             $(e.target).removeClass('mm-expand');
             //t.css('display', 'none');
             t.removeClass(toggled_class);
+            t.addClass('must_hide');
         }
         //*/
     }
@@ -1707,7 +1709,12 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
                                     }
 
                                 }
-                                var tokens = ret.result[f.id].tokens;
+                                if (!!ret.result[f.id]) {
+                                    var tokens = ret.result[f.id].tokens;
+                                } else {
+                                    var tokens = [];
+                                }
+
                                 var sp = [];
                                 if (!!tokens)
                                     tokens.forEach(function(token) {

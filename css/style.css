@@ -167,6 +167,11 @@ button {
     display: block!important;
 }
 
+.must_hide {
+    visibility: hidden!important;
+    display: none!important;
+}
+
 .enlong {
     height: 500px;
 }
@@ -238,4 +243,8 @@ button {
 
 .ui-loader {
     display: none;
+}
+
+div.ui-input-text {
+    display: inline-block;
 }
