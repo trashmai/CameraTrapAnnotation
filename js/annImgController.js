@@ -2,6 +2,8 @@
 var app = angular.module('annImg', ['angularTreeview']);
 app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', function($scope, $sce, simpleQueryService) {
 
+    $scope.is_init = true;
+
     window.annScope = $scope;
     window.imageLock = 0;
 
@@ -737,6 +739,12 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
             chatroom_rwd.append('<br/>');
             chatroom_rwd.append('<span>' + data + '</span>');
             chatroom_rwd.scrollTop(chatroom_rwd[0].scrollHeight - chatroom_rwd.height());
+
+            if (!$('.chatroom-head').parent().hasClass('minimize-expanded') && !$scope.is_init) {
+                $('.chatroom-head').parent().addClass('minimize-expanded');
+                $('.chatroom-head').parent().find('input').focus();
+            }
+            $scope.is_init = false;
 
         }
 

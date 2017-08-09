@@ -84,7 +84,6 @@ button {
 
 @media (min-width: 1200px) {
     #dir_img_tree {
-        max-height: 670px;
         min-width: 300px;
     }
     .ct-not-xl-meta {
@@ -95,12 +94,28 @@ button {
     }
 }
 
+@media (min-width: 1200px) and (min-height: 850px) {
+    #dir_img_tree {
+        max-height: 600px;
+    }
+}
+
+@media (min-width: 1200px) and (max-height: 849px) {
+    #dir_img_tree {
+        max-height: 500px;
+    }
+}
+
 @media (max-width: 1199px) {
     .ct-not-xl-data {
         margin-top: 1em;
     }
     .ct-not-xl-noshow {
         display: none;
+    }
+    .ct-lg-show {
+        display: block!important;
+        cursor: pointer;
     }
 }
 
@@ -241,10 +256,63 @@ button {
     }
 }
 
+@media (min-width: 992px) and (max-width: 1199px),
+(max-height:919px) {
+    .minimize-r {
+        right: 0px;
+    }
+    /*/*
+    .minimize-r:hover {
+        height: initial;
+    }
+    /**/
+    .minimize-m {
+        right: 355px;
+    }
+    /*/*
+    .minimize-m:hover {
+        height: initial;
+    }
+    /**/
+    .minimize-l {
+        right: 710px;
+    }
+    /*/*
+    .minimize-l:hover {
+        height: initial;
+    }
+    /**/
+    .minimize {
+        cursor: pointer;
+        width: 350px;
+        height: 1.5em;
+        bottom: 0px;
+        position: fixed;
+        background: black;
+        z-index: 10;
+    }
+    .minimize-expanded {
+        height: initial;
+        padding-left: 1px;
+        padding-right: 1px;
+        padding-top: 1px;
+        border: 1px solid white;
+    }
+    .min-head {
+        display: block;
+        background: white;
+        color: black;
+    }
+}
+
 .ui-loader {
     display: none;
 }
 
 div.ui-input-text {
+    display: inline-block;
+}
+
+div.ui-checkbox {
     display: inline-block;
 }

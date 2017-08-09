@@ -44,7 +44,7 @@
 <body ng-controller="annImgController" class='container_fluid'>
     <div class='col-12' style='padding:0px;'>
         <div class='row ct-xs-no-rpad' style='margin:20px 0px 0px 0px; width:100%;'>
-            <div class='clearfix ct-xs-no-rpad menu ct-md-show col-12 mm-close noshow' style='padding-left:15px;' ng-click='toggleSib($event)' ng-touch='toggleSib($event)'>清單摘要</div>
+            <div class='clearfix ct-xs-no-rpad menu ct-md-show col-12 mm-close noshow' style='padding-left:15px;' ng-click='toggleSib($event)' ng-touch='toggleSib($event)'>照片清單</div>
             <div class='col-xl-2 col-lg-3 ct-md-noshow ct-xs-no-rpad dir_img_tree_wrapper col-12'>
                 <div class='scroll' id='dir_img_tree' style="overflow-y:auto;" data-angular-treeview="true" data-tree-id="dirImgTree" data-tree-model="dirImgList" data-node-id="id" data-node-label="name" data-node-comment="comment" data-node-children="children">
                 </div>
@@ -98,7 +98,8 @@
                         <br/><span>大寫 M 開啟滑鼠放大鏡</span>
                         <br/>
                     </div>
-                    <div class='col-xl-11 offset-xl-0 offset-lg-1 col-lg-2' style='margin-top:1em;'>
+                    <div class='col-xl-11 offset-xl-0 offset-lg-1 col-lg-2 minimize minimize-l' style='margin-top:1em;'>
+                        <div class='min-head nav-head' onclick="toggleMinParent(event)">照片切換</div>
                         <button id='copy_prev' ng-click='copyFromPrev()'>複製前一張 (C)</button>
                         <button id='goto_start_of_burst' ng-show='prev_image_burst' ng-click='gotoTerminalOfBurst(-1)'>連拍第一張 (Q)</button>
                         <button ng-hide='prev_image_burst' disabled>連拍第一張 (Q)</button>
@@ -111,8 +112,9 @@
                         <button class='main_prev_image' ng-click='switchImage("prev", $event)'>前一張 (P, ←)</button>
                         <button class='main_next_image' ng-click='switchImage("next", $event)'>下一張 (N, →)</button>
                     </div>
-                    <div class='col-xl-11 col-lg-4 col-xs-12' style='margin-top:1em;'>
-                        <div> 目前顯示第 {{current_image_idx}} 號照片<br/>(J) 跳到第 <input min=0 type=number id='input_goto_image_idx' name='goto_image_idx' ng-model="goto_image_idx" style='width:3em;' /> 號，<button ng-click='selectImage()'> 我跳 </button> </div>
+                    <div class='col-xl-11 col-lg-4 col-xs-12 minimize minimize-m' style='margin-top:1em;'>
+                        <div class='min-head guide-head' onclick="toggleMinParent(event)">目前顯示第 {{current_image_idx}} 號照片</div>
+                        <div>(J) 跳到第 <input min=0 type=number id='input_goto_image_idx' name='goto_image_idx' ng-model="goto_image_idx" style='width:3em;' /> 號，<button ng-click='selectImage()'> 我跳 </button> </div>
                         <div class='ct-md-noshow'>
                             <div> 連拍判定 (照片先後間隔小於 <input min=0 type=number name='burst-threshold' ng-model="threshold" style='width:3em;' /> 秒) <button ng-click='setThreshold()'>設定新值</button> </div>
                             <div class='notice message' ng-show='prev_image_burst'> 此張照片與 前一張 <span class='text highlight'>是連拍照片</span> </div>
@@ -126,9 +128,9 @@
                         <input class='to_search' ng-model='toSearch' placeholder="搜尋 (/)，例如：山羌" /> <button ng-click='simpleSearch()'>send</button><button ng-click='resetImageList()'>clear</button>
                         <br/>
                     </div>
-                    <div class='col-xl-11 col-lg-4 ct-md-noshow' style='margin-top:1em;'>
-                        <div>{{subers_txt}}</div>
-                        <div id='chatroom' style='background:gray; height:5em; overflow-y:auto; width:90%;'><span>對話最頂層</span></div>
+                    <div class='col-xl-11 col-lg-4 ct-md-noshow minimize minimize-r' style='margin-top:1em;'>
+                        <div class='min-head chatroom-head' onclick="toggleMinParent(event)">{{subers_txt || "在線互動"}}</div>
+                        <div id='chatroom' style='background:gray; height:5em; overflow-y:auto;'><span>對話最頂層</span></div>
                         <span>({{conn_id || '聊天室未連線'}}): </span><input ng-keydown='send_chatroom_msg_by_enter($event)' class='chat_room_msg' ng-model='chat_room_msg' placeholder="(:) say something here..." /><button ng-click='send_chatroom_msg()'>送出對話</button>
                     </div>
                 </div>
@@ -183,7 +185,7 @@
                     </div-->
                 </div>
 
-                <div class='col ct-md-show noshow'>
+                <div class='col-lg-12 col ct-lg-show noshow'>
                     <hr style='color:green; border: 1px solid;' />
                 </div>
 
@@ -228,7 +230,7 @@
     <div class='clearfix ct-xs-no-rpad menu ct-md-show col-md-12 mm-close noshow' style='padding-left:15px;' ng-click='toggleSib($event)' ng-touch='toggleSib($event)'>聊天室</div>
     <div class='col noshow' style='margin-top:1em;'>
         <div>{{subers_txt}}</div>
-        <div id='chatroom_rwd' style='background:gray; height:5em; overflow-y:auto; width:90%;'><span>對話最頂層</span></div>
+        <div id='chatroom_rwd' style='background:gray; height:5em; overflow-y:auto;'><span>對話最頂層</span></div>
         <span>({{conn_id || '聊天室未連線'}}): </span><input ng-keydown='send_chatroom_msg_by_enter($event)' class='chat_room_msg' ng-model='chat_room_msg' placeholder="(:) say something here..." /><button ng-click='send_chatroom_msg()'>送出對話</button>
     </div>
 

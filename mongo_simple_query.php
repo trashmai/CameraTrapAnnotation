@@ -16,7 +16,7 @@ $query = json_decode(file_get_contents("php://input"));
 // for debug
 // $query['url'] = 'example001.png';
 if (!!$query) {
-  $contains = $query->contains;
+  $contains = @$query->contains;
 }
 else {
   $contains = ".*";
