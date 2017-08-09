@@ -257,7 +257,7 @@ button {
 }
 
 @media (min-width: 992px) and (max-width: 1199px),
-(max-height:919px) {
+(max-height:849px) {
     .minimize-r {
         right: 0px;
     }
