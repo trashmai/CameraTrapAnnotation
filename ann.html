@@ -45,11 +45,11 @@
     <div class='col-12' style='padding:0px;'>
         <div class='row ct-xs-no-rpad' style='margin:20px 0px 0px 0px; width:100%;'>
             <div class='clearfix ct-xs-no-rpad menu ct-md-show col-12 mm-close noshow' style='padding-left:15px;' ng-click='toggleSib($event)' ng-touch='toggleSib($event)'>照片清單</div>
-            <div class='col-xl-2 col-lg-3 ct-md-noshow ct-xs-no-rpad dir_img_tree_wrapper col-12'>
+            <div class='col-xl-3 col-lg-3 ct-md-noshow ct-xs-no-rpad dir_img_tree_wrapper col-12'>
                 <div class='scroll' id='dir_img_tree' style="overflow-y:auto;" data-angular-treeview="true" data-tree-id="dirImgTree" data-tree-model="dirImgList" data-node-id="id" data-node-label="name" data-node-comment="comment" data-node-children="children">
                 </div>
             </div>
-            <div class='col-xl-7 col-lg-8 ct-md-no-padding col-12'>
+            <div class='col-xl-6 col-lg-8 ct-md-no-padding col-12'>
                 <div class='ct-md-show noshow' style='margin:0px; padding:0px;'>
                     <hr style='color:green; border: 1px solid; margin-left:15px; margin-right:15px;' />
                 </div>
@@ -98,21 +98,22 @@
                         <br/><span>大寫 M 開啟滑鼠放大鏡</span>
                         <br/>
                     </div>
-                    <div class='col-xl-11 offset-xl-0 offset-lg-1 col-lg-2 minimize minimize-l' style='margin-top:1em;'>
+                    <div class='col-xl-11 offset-xl-0 offset-lg-1 col-lg-2 w350' style='margin-top:1em;'>
+                        <!--div class='col-xl-11 offset-xl-0 offset-lg-1 col-lg-2 minimize minimize-l' style='margin-top:1em;'-->
                         <div class='min-head nav-head' onclick="toggleMinParent(event)">照片切換</div>
-                        <button id='copy_prev' ng-click='copyFromPrev()'>複製前一張 (C)</button>
-                        <button id='goto_start_of_burst' ng-show='prev_image_burst' ng-click='gotoTerminalOfBurst(-1)'>連拍第一張 (Q)</button>
-                        <button ng-hide='prev_image_burst' disabled>連拍第一張 (Q)</button>
+                        <button id='copy_prev' ng-click='copyFromPrev()'>複製前一張 (C)</button><br/>
+                        <button id='goto_start_of_burst' ng-show='prev_image_burst' ng-click='gotoTerminalOfBurst(-1)'>&lt;&lt;</button>
+                        <button ng-hide='prev_image_burst' disabled>&lt;&lt;</button>
+                        <button id='goto_mid_of_burst' ng-show='next_image_burst || prev_image_burst' ng-click='gotoPercentile(0.5)'>◎</button>
+                        <button ng-hide='next_image_burst || prev_image_burst' disabled>◎</button>
+                        <button id='goto_end_of_burst' ng-show='next_image_burst' ng-click='gotoTerminalOfBurst(1)'>&gt;&gt;</button>
+                        <button ng-hide='next_image_burst' disabled>&gt;&gt;</button>
                         <br class='ct-md-noshow' />
-                        <button id='goto_mid_of_burst' ng-show='next_image_burst || prev_image_burst' ng-click='gotoPercentile(0.5)'>連拍中間張 (W)</button>
-                        <button ng-hide='next_image_burst || prev_image_burst' disabled>連拍中間張 (W)</button>
-                        <button id='goto_end_of_burst' ng-show='next_image_burst' ng-click='gotoTerminalOfBurst(1)'>連拍最末張 (E)</button>
-                        <button ng-hide='next_image_burst' disabled>連拍最末張 (E)</button>
-                        <br class='ct-md-noshow' />
-                        <button class='main_prev_image' ng-click='switchImage("prev", $event)'>前一張 (P, ←)</button>
-                        <button class='main_next_image' ng-click='switchImage("next", $event)'>下一張 (N, →)</button>
+                        <button class='main_prev_image' ng-click='switchImage("prev", $event)'>←</button>
+                        <button class='main_next_image' ng-click='switchImage("next", $event)'>→</button>
                     </div>
-                    <div class='col-xl-11 col-lg-4 col-xs-12 minimize minimize-m' style='margin-top:1em;'>
+                    <!--div class='col-xl-11 col-lg-4 col-xs-12 minimize minimize-m' style='margin-top:1em;'-->
+                    <div class='col-xl-11 col-lg-4 col-xs-12' style='margin-top:1em;'>
                         <div class='min-head guide-head' onclick="toggleMinParent(event)">目前顯示第 {{current_image_idx}} 號照片</div>
                         <div>(J) 跳到第 <input min=0 type=number id='input_goto_image_idx' name='goto_image_idx' ng-model="goto_image_idx" style='width:3em;' /> 號，<button ng-click='selectImage()'> 我跳 </button> </div>
                         <div class='ct-md-noshow'>
@@ -128,8 +129,8 @@
                         <input class='to_search' ng-model='toSearch' placeholder="搜尋 (/)，例如：山羌" /> <button ng-click='simpleSearch()'>send</button><button ng-click='resetImageList()'>clear</button>
                         <br/>
                     </div>
-                    <div class='col-xl-11 col-lg-4 ct-md-noshow minimize minimize-r' style='margin-top:1em;'>
-                        <div class='min-head chatroom-head' onclick="toggleMinParent(event)">{{subers_txt || "在線互動"}}</div>
+                    <div class='col-xl-11 col-lg-4 ct-md-noshow almost-always minimize minimize-r' style='margin-top:1em;'>
+                        <div class='min-head chatroom-head' onclick="toggleMinParent(event)">{{subers_txt || "聊天室未連線"}}</div>
                         <div id='chatroom' style='background:gray; height:5em; overflow-y:auto;'><span>對話最頂層</span></div>
                         <span>({{conn_id || '聊天室未連線'}}): </span><input ng-keydown='send_chatroom_msg_by_enter($event)' class='chat_room_msg' ng-model='chat_room_msg' placeholder="(:) say something here..." /><button ng-click='send_chatroom_msg()'>送出對話</button>
                     </div>
@@ -151,28 +152,28 @@
         <form name='edit_token_form'>
             <div class='row ct-md-pad'>
                 <div id='edit_section' class='clearfix menu ct-md-show col-md-12 ct-xs-no-rpad mm-expand noshow' style='margin-top:0px; padding-left:15px;' ng-click='toggleSib($event)'>編輯資料</div>
-                <div class='col-xl-7 offset-xl-2 col-lg-10 offset-lg-1 must_show'>
+                <div class='col-xl-9 offset-xl-3 col-lg-10 offset-lg-1 must_show'>
                     <div style='font-weight:bold;margin-top:5px;' ng-repeat='(ti, edit_token) in ann.tokens track by $index'>
                         <!--table style='width:100%;'-->
                         <div class='row'>
-                            <div class='col-lg-12 ct-xs-no-rpad'>
-                                <button ng-click='removeToken($index)' tabindex=-1>-</button><label style='color:silver;' class='ct-md-noshow'>{{edit_token.token_id}}</label>
+                            <div class='col-lg-1 ct-xs-no-rpad'>
+                                <button ng-click='removeToken($index)' tabindex=-1>-</button><label style='color:silver;' class='ct-md-noshow'><!--{{edit_token.token_id}}--></label>
                             </div>
                             <!--tr>
                                         <td style='width:100px;' ng-repeat='(di, dum) in standard_data_key'>
                                             <span style='color:grey;'>{{camelShorten(edit_token.data[di].label)}}</span>
                                         </td>
                                     </tr-->
-                            <div class='col-lg col-md-6 ct-col-userinput-bp user-input-wrapper ct-xs-no-rpad' ng-repeat='(di, dum) in standard_data_key'>
+                            <div class='col-lg-1 col-md-6 ct-col-userinput-bp user-input-wrapper ct-xs-no-rpad' ng-repeat='(di, dum) in standard_data_key'>
                                 <input name='data-value-{{ti}}-{{di}}' class='data-value user-input data_row_{{ti}} data_col_{{di}} data_{{ti}}_{{di}} {{dum}}' ng-model='edit_token.data[di].value' ng-change='autoValues(di, edit_token)' ng-blur='cellBlurred($event)' autocomplete="off"
                                     ng-keydown='autoValues(di, edit_token, $event)' ng-focus='autoValues(di, edit_token)' placeholder="{{edit_token.data[di].label}}">
-                                <div class='scroll token-data' style='color:floralwhite; border:solid 1px white; background-color:black;position:absolute;z-index:1000;height:200px;overflow-y:auto;overflow-x:hidden' ng-show='showSelectionBox[edit_token.token_id + "_" + edit_token.data[di].key + "-di-" + di]'>
-                                    <span tabindex=-1 ng-repeat="(elmId, v) in autoRes[edit_token.data[di].key] | v_filter : di : showSelectionBox[edit_token.token_id + '_' + edit_token.data[di].key + '-di-' + di] : this : 1" ng-mouseenter='elmSearchME(edit_token.token_id + "_" + edit_token.data[di].key + "-elmId-" + elmId)'
+                                <div class='scroll token-data' ng-show='showSelectionBox[edit_token.token_id + "_" + edit_token.data[di].key + "-di-" + di]'>
+                                    <div style='width:500px; overflow:hidden; height:2em;' tabindex=-1 ng-repeat="(elmId, v) in autoRes[edit_token.data[di].key] | v_filter : di : showSelectionBox[edit_token.token_id + '_' + edit_token.data[di].key + '-di-' + di] : this : 1" ng-mouseenter='elmSearchME(edit_token.token_id + "_" + edit_token.data[di].key + "-elmId-" + elmId)'
                                         ng-mouseleave='elmSearchML(edit_token.token_id + "_" + edit_token.data[di].key + "-elmId-" + elmId)' class='elm_search' ng-click='autoValueClicked(di, edit_token, v)'>
-                                <!--tabindex for tab looping in values--><span tabindex=-1 class='elm_search_option' id='{{"opt_" + edit_token.token_id + "_" + edit_token.data[di].key + "_elmId_" + elmId}}' ng-style='elmSearchStyleInd[edit_token.token_id + "_" + edit_token.data[di].key + "-elmId-" + elmId]||elmSearchStyle' ng-bind-html="v.matched" ng-keydown='optsRotation($event, edit_token.token_id + "_" + edit_token.data[di].key + "-di-" + di, di, edit_token, v)'>
-                                </span>
-                                    <br/>
-                                    </span>
+                                        <div style='width:800px; height:2em;' tabindex=-1 class='elm_search_option' id='{{"opt_" + edit_token.token_id + "_" + edit_token.data[di].key + "_elmId_" + elmId}}' ng-style='elmSearchStyleInd[edit_token.token_id + "_" + edit_token.data[di].key + "-elmId-" + elmId]||elmSearchStyle'
+                                            ng-bind-html="v.matched" ng-keydown='optsRotation($event, edit_token.token_id + "_" + edit_token.data[di].key + "-di-" + di, di, edit_token, v)'>
+                                        </div><br/>
+                                    </div>
                                 </div>
                             </div>
                             <!--/table-->
@@ -191,10 +192,9 @@
 
                 <div class='clearfix ct-xs-no-rpad menu ct-md-show col-md-12 mm-close noshow' style='padding-left:15px;' ng-click='toggleSib($event)' ng-touch='toggleSib($event)'>Metadata</div>
                 <div class='col-xl-3 offset-xl-9 col-lg-10 offset-lg-1 ct-not-xl-meta ct-xs-no-rpad ct-md-noshow' style='margin-bottom:2em;'>
-                    <div class='row' style='padding-left:15px;'>
-                        <div class='col-xl-6 col-lg-3 ct-xs-no-rpad'>
-                            <button ng-click='floodFillDirMeta()'>Metadata 自動填滿</button>
-                        </div>
+
+                    <div class='row almost-always minimize minimize-m' style='padding-left:15px;'>
+                        <div class='col-xl-12 col-lg-12 min-head' onclick="toggleMinParent(event)">Metadata {{ann.date}}T{{ann.time}}</div>
                         <div class='col-xl-6 col-lg-3 metadata-wrapper ct-xs-no-rpad'>
                             <input class='metadata first' name='project_name' ng-model='ann.meta.project_name' placeholder='計畫名稱' />
                         </div>
@@ -216,6 +216,10 @@
                         <div class='col-xl-6 col-lg-3 metadata-wrapper ct-xs-no-rpad'>
                             <input class='metadata' name='project_scope_camera_id' ng-model='ann.meta.project_scope_camera_id' placeholder='相機編號' />
                         </div>
+                        <div class='col-xl-6 col-lg-3 ct-xs-no-rpad'>
+                            <button ng-click='floodFillDirMeta()'>填滿目錄</button>
+                        </div>
+
                     </div>
                 </div>
 

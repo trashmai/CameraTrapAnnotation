@@ -1464,6 +1464,8 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
                 var new_vname = v.sciname.replace(/\(.+\)/g, '').replace(/ +/, ' ').trim().split(':')[0];
                 if (token.data[1].value !== new_vname) {
                     token.data[1].value = v.sciname.replace(/\(.+\)/g, '').replace(/ +/, ' ').trim();
+                    if (token.data[1].value == 'null')
+                        token.data[1].value = '';
                     $scope.edit_token_form.$setDirty();
                 }
                 break;
@@ -1560,7 +1562,7 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
         if ($.isEmptyObject($scope.autoRes[attrName])) {
             simpleQueryService.simpleQuery(valFromFile, {})
                 .then(function(ret) {
-                    var res = [];
+                    var res = [{ namecode: '', sciname: '', vname: '' }];
                     var lines = ret.split('\n');
                     lines.forEach(function(line) {
                         if (line.length > 3) {
@@ -1680,12 +1682,15 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
                         node.name = d.file.replace(img_base_path, '').split('/').pop();
                         node.children = [];
                         node.dir = selectedNode.id;
+                        node.timestamp = d.timestamp;
                         files.push(node);
                     });
 
                     var data = { dir_path: selectedNode.id };
                     simpleQueryService.simpleQuery("mongo_load_dir.php", data, post = true)
                         .then(function(ret) {
+                            var color_diff = false;
+                            var time_before = 0;
                             files.forEach(function(f) {
                                 if (f.id == $scope.image_list[$scope.current_image_idx].file) {
 
@@ -1735,6 +1740,14 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
                                 var sp_string = sp.join(',');
                                 f.comment = sp_string;
                                 f.is_image = true;
+
+                                if (f.timestamp - time_before > $scope.threshold) {
+                                    color_diff = !color_diff;
+                                }
+                                f.color_diff = color_diff;
+                                time_before = f.timestamp;
+
+
                             });
                             selectedNode.loaded = true;
                             selectedNode.collapsed = false;
@@ -1756,6 +1769,8 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
             var data = { dir_path: selectedNode.id };
             simpleQueryService.simpleQuery("mongo_load_dir.php", data, post = true)
                 .then(function(ret) {
+                    var time_before = 0;
+                    var color_diff = false;
                     files.forEach(function(f) {
                         //*
                         if (f.id == $scope.image_list[$scope.current_image_idx].file) {
@@ -1801,6 +1816,13 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
                         var sp_string = sp.join(',');
                         f.comment = sp_string;
                         f.is_image = true;
+
+                        if (f.timestamp - time_before > $scope.threshold) {
+                            color_diff = !color_diff;
+                        }
+                        f.color_diff = color_diff;
+                        time_before = f.timestamp;
+
                     });
                     selectedNode.loaded = true;
                     selectedNode.collapsed = false;

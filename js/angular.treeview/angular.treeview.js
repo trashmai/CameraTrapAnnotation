@@ -51,7 +51,7 @@
                 //tree template
                 var template =
                     '<ul>' +
-                    '<li data-ng-repeat="(nid, node) in ' + treeModel + '">' +
+                    '<li data-ng-repeat="(nid, node) in ' + treeModel + '" class="{{(node.color_diff ? \'color_diff\':\'\')}}">' +
                     '<i class="collapsed dir_{{nid}}" data-ng-show="(node.' + nodeChildren + '.length || node.is_dir) && node.collapsed" data-ng-click="' + treeId + '.selectNodeHead(node)"></i>' +
                     '<i class="expanded" data-ng-show="(node.' + nodeChildren + '.length || node.is_dir)  && !node.collapsed" data-ng-click="' + treeId + '.selectNodeHead(node)"></i>' +
                     '<i class="normal" data-ng-hide="node.is_dir || node.' + nodeChildren + '.length"></i> ' +

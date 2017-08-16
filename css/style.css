@@ -1,4 +1,4 @@
-span.matched_part {
+.matched_part {
     color: red;
 }
 
@@ -87,7 +87,7 @@ button {
         min-width: 300px;
     }
     .ct-not-xl-meta {
-        margin-top: -7.5em;
+        margin-top: -5em;
     }
     .ct-xl-noshow {
         display: none;
@@ -102,7 +102,7 @@ button {
 
 @media (min-width: 1200px) and (max-height: 849px) {
     #dir_img_tree {
-        max-height: 500px;
+        max-height: 450px;
     }
 }
 
@@ -117,6 +117,10 @@ button {
         display: block!important;
         cursor: pointer;
     }
+}
+
+input.to_search {
+    width: 150px;
 }
 
 @media (max-width: 991px) {
@@ -136,7 +140,7 @@ button {
     body,
     #dir_img_tree span {
         font-size: 2em!important;
-        line-height: 110%!important;
+        line-height: 150%!important;
     }
     .ct-md-noshow {
         display: none;
@@ -191,6 +195,18 @@ button {
     height: 500px;
 }
 
+.token-data {
+    color: floralwhite;
+    border: solid 1px white;
+    background-color: black;
+    position: absolute;
+    top: -400px;
+    z-index: 1000;
+    height: 400px!important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 @media (max-width: 575px) {
     button {
         width: 45%;
@@ -218,6 +234,19 @@ button {
     .ct-md-pad {
         padding: 0px;
     }
+    .token-data {
+        color: floralwhite;
+        border: solid 1px white;
+        background-color: black;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: 1000;
+        height: 100%!important;
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 }
 
 .mm-close:before {
@@ -239,7 +268,7 @@ button {
     content: "";
 }
 
-@media (max-width: 1550px) and (min-width:992px) {
+@media (min-width:1350px) {
     .ct-col-userinput-bp {
         display: flex;
         position: relative;
@@ -251,13 +280,30 @@ button {
         -webkit-flex: 0 0 25%;
         -ms-flex: 0 0 25%;
         flex: 0 0 25%;
-        max-width: 25%;
+        max-width: 10%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 1349px) and (min-width:992px) {
+    .ct-col-userinput-bp {
+        display: flex;
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 25%;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 12%;
         justify-content: space-between;
     }
 }
 
 @media (min-width: 992px) and (max-width: 1199px),
-(max-height:849px) {
+(max-height:849px) and (min-width:576px) {
     .minimize-r {
         right: 0px;
     }
@@ -305,6 +351,10 @@ button {
     }
 }
 
+.w350 {
+    width: 350px!important;
+}
+
 .ui-loader {
     display: none;
 }
@@ -315,4 +365,69 @@ div.ui-input-text {
 
 div.ui-checkbox {
     display: inline-block;
+}
+
+@media (min-width: 576px) {
+    .almost-always.minimize {
+        cursor: pointer;
+        width: 350px;
+        height: 1.5em;
+        bottom: 0px;
+        position: fixed;
+        background: black;
+        z-index: 10;
+    }
+    .almost-always.minimize-r {
+        right: 0px;
+    }
+    /*/*
+    .minimize-r:hover {
+        height: initial;
+    }
+    /**/
+    .almost-always.minimize-m {
+        right: 355px;
+    }
+    /*/*
+    .minimize-m:hover {
+        height: initial;
+    }
+    /**/
+    .almost-always.minimize-l {
+        right: 710px;
+    }
+    /*/*
+    .minimize-l:hover {
+        height: initial;
+    }
+    /**/
+    .almost-always.minimize {
+        cursor: pointer;
+        width: 350px;
+        height: 1.5em;
+        bottom: 0px;
+        padding-left: 1px!important;
+        padding-right: 1px;
+        padding-top: 1px;
+        margin-left: 0px;
+        margin-right: 0px;
+        position: fixed;
+        background: black;
+        z-index: 10;
+    }
+    .almost-always.minimize-expanded {
+        height: initial;
+        padding-left: 1px!important;
+        padding-right: 1px;
+        padding-top: 1px;
+        margin-left: 0px;
+        margin-right: 0px;
+        border: 1px solid white;
+    }
+    .almost-always.minimize .min-head {
+        display: block;
+        background: white;
+        color: black;
+        padding: 0px;
+    }
 }

@@ -140,3 +140,7 @@ input.ng-dirty {
     background-color: blue!important;
     color: white!important;
 }
+
+.color_diff {
+  background-color: #222!important;
+}

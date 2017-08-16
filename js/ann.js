@@ -260,6 +260,9 @@ $(document).ready(function() {
                 }
             } else if (e.key == 'Enter') {
                 $('.elm_search:first').click()
+                e.stopPropagation();
+                e.preventDefault();
+
             }
         }
     });
