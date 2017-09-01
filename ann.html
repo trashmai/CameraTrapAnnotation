@@ -128,6 +128,8 @@
                         <br/>
                         <input class='to_search' ng-model='toSearch' placeholder="搜尋 (/)，例如：山羌" /> <button ng-click='simpleSearch()'>send</button><button ng-click='resetImageList()'>clear</button>
                         <br/>
+                        <!--input class='to_output' ng-value='currentDir' /-->
+                        <button ng-click='outputCSV()'>資料夾輸出CSV</button>
                     </div>
                     <div class='col-xl-11 col-lg-4 ct-md-noshow almost-always minimize minimize-r' style='margin-top:1em;'>
                         <div class='min-head chatroom-head' onclick="toggleMinParent(event)">{{subers_txt || "聊天室未連線"}}</div>

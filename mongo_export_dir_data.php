@@ -11,15 +11,18 @@ $db = $mongoClient->$dbname;
 $cdata = $db->local_data;
 
 // 要load的criteria, image url
-$query = json_decode(file_get_contents("php://input"));
+#$query = json_decode(file_get_contents("php://input"));
 
 // $dir_path = "D:/camera_trap/xampp/htdocs/ct_annotation/images/test/HC";
 $dir_path = "D:/.+?/HC";
 // for debug
 // $query['url'] = 'example001.png';
-if (!!$query) {
-  $dir_path = $query->dir_path;
+if (!!@$_GET['dir_path']) {
+  // $dir_path = $query->dir_path;
+  $dir_path = $_GET['dir_path'];
 }
+
+$tmpfname = md5(tempnam("./tmp", "test_")) . ".csv";
 
 // 設定查詢條件
 //$queryCondition['tokens']['$elemMatch']['data']['$elemMatch']['value']['$regex'] = $contains;
@@ -56,7 +59,7 @@ $dummy_data_value = array('NA','NA','NA','NA',1 ,'NA','NA','NA');
 
 // prepare output file
 $UTF8_BOM = "\xEF\xBB\xBF";
-file_put_contents("test_output.csv", $UTF8_BOM);
+file_put_contents($tmpfname, $UTF8_BOM);
 
 // 注意與下方的 $tmp_row + $required 的欄位順序
 $head = array(
@@ -105,9 +108,18 @@ foreach ($cursor as $res) { //照片層級
 
 function output($row) {
   // serializing
+  global $tmpfname;
   $sep = ",";
-  file_put_contents("test_output.csv", implode($sep, $row) . "\n", FILE_APPEND);
+  file_put_contents($tmpfname, implode($sep, $row) . "\n", FILE_APPEND);
 }
+
+
+header("Content-type: text/csv");
+header("Content-Disposition: attachment; filename=$tmpfname"); 
+readfile($tmpfname);
+
+
+
 
 //if (!$query)
 //  var_dump($results);

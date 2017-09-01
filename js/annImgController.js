@@ -24,6 +24,10 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
         window.location.reload();
     }
 
+    $scope.outputCSV = function() {
+        console.log($scope.currentDir);
+        window.open("mongo_export_dir_data.php?dir_path=" + encodeURIComponent($scope.currentDir), "_blank");
+    }
 
     $scope.setThreshold = function() {
         localStorage.setItem('threshold', $scope.threshold);
