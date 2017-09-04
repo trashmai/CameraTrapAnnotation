@@ -507,7 +507,7 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
     $scope.floodFillDirMeta = function() {
         var path = $scope.dir_idx[$scope.current_image_dir_idx];
         var post = {
-            field: 'url',
+            field: 'dir_path',
             value: null,
             meta: {
                 project_name: $scope.ann.meta.project_name || "",
@@ -523,7 +523,8 @@ app.controller('annImgController', ['$scope', '$sce', 'simpleQueryService', func
         //simpleQueryService.simpleQuery("settings.json") // using post
         //  .then(function (settings) {
 
-        post.value = settings[settings.os_type].web_base_path + $scope.dir_idx[$scope.current_image_dir_idx].replace(settings[settings.os_type].images_base_path, '');
+        // post.value = settings[settings.os_type].web_base_path + $scope.dir_idx[$scope.current_image_dir_idx].replace(settings[settings.os_type].images_base_path, '');
+        post.value = path;
         post.sessionId = $scope.conn._session_id;
 
         simpleQueryService.simpleQuery("mongo_save_meta.php", post, true) // using post

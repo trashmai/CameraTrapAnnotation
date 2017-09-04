@@ -26,7 +26,7 @@ $socket->send($ret_json);
 
 function mongo_save ($meta, $field, $value) {
 
-	global $dbhost, $dbname, $toEscape, $escaped;
+	global $dbhost, $dbname, $toEscape, $escaped, $sessionId;
 
 	$toUpdate['meta'] = $meta;
 
@@ -39,7 +39,8 @@ function mongo_save ($meta, $field, $value) {
 	// 取得 demo 這個 collection
 	$cdata = $db->local_data;
 
-	$queryCondition[$field]['$regex'] = $queryCondition[$field]['$regex'] = str_replace($toEscape, $escaped, $value);
+	//$queryCondition[$field]['$regex'] = str_replace($toEscape, $escaped, $value);
+	$queryCondition[$field] = $value;
 
 	// update options
 	$update_options['upsert'] = true;
